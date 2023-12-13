@@ -1,0 +1,217 @@
+﻿@page "/payment/{OrderNum:int}"
+@using Group7_FinalProject.Data
+@using Microsoft.Data.SqlClient
+@inject NavigationManager navigationManager
+
+<h3>Payment</h3>
+
+<body>
+    <div class="container text-xl-start" id="paymentBody">
+        <div class="row">
+            <div class="col">
+                <label for="orderNumber" >Order #: </label>
+                <p id="orderNumber">@OrderNum</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="totalCost">Total Cost</label>
+                <p id="totalCost">$@TotalCost()</p>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col col-3">
+                <label for="amountPaid">Amount Paid</label>
+                <input name="inputAm" type="text" id="amountPaid" IsEnable="True" placeholder="Enter amount paid" @bind="@amountInput">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-3">
+                <label for="outstandingBalance">Outstanding Balance: </label>
+            </div>
+            <div class="col">
+                <p id="outstandingBalance">$@outstandingBalance</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-3">
+                <button id="payButton" type="button" class="btn btn-primary" @onclick="() => Pay()">Mark as Paid </button>
+                @* <button id="payButton" type="button" class="btn btn-primary" disabled=@IsTaskRunning @onclick ="() => Pay()">Mark as Paid </button> *@
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-5">
+                @* Method so that the alert box only shows when an error occurs *@
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" @onclick="clearErrorMessage"></button>
+                        @errorMessage
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Food#</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Date and Time</th>
+                <th scope="col">Status</th>
+                <th scope="col">Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var a in MenuPage.orderList1)
+            {
+                <tr>
+                    <th scope="row">@a.OrderFoodNum</th>
+                    <td>@a.Quantity</td>
+                    <td>@a.OrderDateTime</td>
+                    <td>@a.OrderStatus</td>
+                    <td>$@a.TotalPrice</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+
+@code {
+    //Parameter passed from MenuPage
+    [Parameter]
+    public int OrderNum { get; set; }
+    protected override void OnParametersSet()
+    {
+        //the param will be set now
+        var num = OrderNum;
+    }
+
+    public int totalCost;
+    public int amountInput;
+    public int outstandingBalance;
+    public string paymentStatus;
+    public string errorMessage;
+
+    // This method will is use to initialized the methods inside onece the page load.
+    protected override void OnInitialized() // = On Page Load
+    {
+        TotalCost();
+        outstandingBalance = TotalCost();
+    }
+    // This method is check if the balance is zero and throws exception if not.
+    public void OutstandingBalanceValidation()
+    {
+        if (CheckBalance() != 0)
+        {
+            throw new InvalidOutstandingBalanceException();
+        }
+    }
+
+    // This method checks if the user input is correct.
+    public void UserInputValidation()
+    {
+        if (amountInput < 0)
+        {
+            throw new InvalidUserInputException();
+        }
+    }
+
+    // This method computes the total cost of the order.
+    public int TotalCost()
+    {
+        totalCost = 0;
+        foreach (Order o in MenuPage.orderList1)
+        {
+            if (OrderNum == o.OrderNum)
+            {
+                totalCost += o.TotalPrice;
+            }
+        }
+        return totalCost;
+    }
+
+    // This method calculates and returns the balance of the order.
+    public int CheckBalance()
+    {
+        return totalCost - amountInput;
+    }
+
+    //This Method is called after the Mark as Paid button is click.
+    //It serves as the main function
+    public async void Pay()
+    {
+        try
+        {
+
+            clearErrorMessage();
+            UserInputValidation();
+            OutstandingBalanceValidation();
+            outstandingBalance = 0;
+
+            foreach (Order o in MenuPage.orderList1)
+            {
+                if (o.OrderNum == OrderNum)
+                {
+                    o.OrderStatus = "Paid";
+                }
+
+            }
+            AddOrderToDB();
+            amountInput = 0;
+            await Application.Current.MainPage.DisplayAlert("Payment Accepted", "Order Status Updated", "OK");
+        }
+        catch (InvalidUserInputException e)
+        {
+            errorMessage = e.Message;
+        }
+        catch (InvalidOutstandingBalanceException e)
+        {
+            errorMessage = e.Message;
+        }
+        catch (Exception e)
+        {
+            errorMessage = e.Message;
+        }
+    }
+
+    // This method add the order details in the database.
+    public void AddOrderToDB()
+    {
+        string connectOrder = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FinalProject_DB_Group7;Integrated Security=True";
+        SqlConnection connect = new SqlConnection(connectOrder);
+        connect.Open();
+
+
+        foreach (Order o in MenuPage.orderList1)
+        {
+            if(o.OrderStatus == "Paid")
+            {
+                string sql = "INSERT INTO OrderTable (OrderNum, FoodNum, Quantity, OrderDateTime, OrderStatus, TotalPrice) VALUES (@OrderNum,@OrderFoodNum, @Quantity, @OrderDateTime, @OrderStatus, @TotalPrice)";
+                SqlCommand cmd = new SqlCommand(sql, connect);
+
+                cmd.Parameters.AddWithValue("@OrderNum", o.OrderNum);
+                cmd.Parameters.AddWithValue("@OrderFoodNum", o.OrderFoodNum);
+                cmd.Parameters.AddWithValue("@Quantity", o.Quantity);
+                cmd.Parameters.AddWithValue("@OrderDateTime", o.OrderDateTime);
+                cmd.Parameters.AddWithValue("@OrderStatus", o.OrderStatus);
+                cmd.Parameters.AddWithValue("@TotalPrice", o.TotalPrice);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        connect.Close();
+    }
+
+    // This method is called to clear the error message.
+    private void clearErrorMessage()
+    {
+        errorMessage = "";
+    }
+
+
+
+}

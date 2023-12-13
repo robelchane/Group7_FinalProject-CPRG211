@@ -1,0 +1,62 @@
+﻿@page "/homepage"
+@using Group7_FinalProject.Data
+@using Microsoft.Data.SqlClient
+@inject NavigationManager navigationManager
+
+
+<div class="d-flex justify-content-start mb-3">
+    <button class="btn btn-primary" style="font-size: 24px;" @onclick="GoToMenuPage">&#8853; Add Order</button>
+</div>
+<div class="container">
+
+    <h2 class="text-center">Order Status</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Order</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in orders)
+            {
+                <tr>
+                    <td>
+                        <div>
+                            <input type="text" aria-label="Order Number" class="form-control" value="@order.OrderNum                         @order.OrderDateTime" readonly>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="text" aria-label="Order Status" class="form-control" value="@order.OrderStatus" readonly>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+
+    private List<Order> orders = new List<Order>();
+
+    protected override void OnInitialized()
+    {
+        orders = OrderManager.GetOrderFromDB();
+    }
+
+    // This Method navigate to the MenuPage
+    private void GoToMenuPage()
+    {
+        int uniqueOrderNum = GenerateUniqueNumber();
+        navigationManager.NavigateTo($"MenuPage/{uniqueOrderNum}");
+
+    }
+
+    // This Method Generates the Random Order Number
+    private static int GenerateUniqueNumber()
+    {
+        Random random = new Random();
+
+        return random.Next(1000, 10000);
+    }
+}

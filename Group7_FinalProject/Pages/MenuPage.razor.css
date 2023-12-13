@@ -1,0 +1,21 @@
+﻿.labels {
+    background: blue;
+    color: white;
+}
+
+.orderscol, .food-square {
+    border: 1px solid black;
+}
+
+.row, .checkoutbutton, .table, .labels, .food-square {
+    padding: 5px;
+}
+
+.table {
+    width: 80%;
+    align-content: start;
+}
+
+.text {
+    width: 100%;
+}

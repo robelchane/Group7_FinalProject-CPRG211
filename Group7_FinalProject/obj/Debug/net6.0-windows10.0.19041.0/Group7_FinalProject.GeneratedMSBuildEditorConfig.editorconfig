@@ -1,0 +1,67 @@
+is_global = true
+build_property.TargetFramework = net6.0-windows10.0.19041.0
+build_property.TargetPlatformMinVersion = 10.0.17763.0
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Group7_FinalProject
+build_property.RootNamespace = Group7_FinalProject
+build_property.ProjectDir = C:\Users\rgeta\Downloads\Group7_FinalProject-Shelyn\Group7_FinalProject-Shelyn\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\rgeta\Downloads\Group7_FinalProject-Shelyn\Group7_FinalProject-Shelyn
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/rgeta/Downloads/Group7_FinalProject-Shelyn/Group7_FinalProject-Shelyn/Main.razor]
+build_metadata.AdditionalFiles.TargetPath = TWFpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rgeta/Downloads/Group7_FinalProject-Shelyn/Group7_FinalProject-Shelyn/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rgeta/Downloads/Group7_FinalProject-Shelyn/Group7_FinalProject-Shelyn/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rgeta/Downloads/Group7_FinalProject-Shelyn/Group7_FinalProject-Shelyn/Pages/HomePage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZVBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rgeta/Downloads/Group7_FinalProject-Shelyn/Group7_FinalProject-Shelyn/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rgeta/Downloads/Group7_FinalProject-Shelyn/Group7_FinalProject-Shelyn/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rgeta/Downloads/Group7_FinalProject-Shelyn/Group7_FinalProject-Shelyn/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rgeta/Downloads/Group7_FinalProject-Shelyn/Group7_FinalProject-Shelyn/Pages/MenuPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWVudVBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-m8v6t94rn3
+
+[C:/Users/rgeta/Downloads/Group7_FinalProject-Shelyn/Group7_FinalProject-Shelyn/Pages/OrderQueue.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJRdWV1ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-1n05zgsi1t
+
+[C:/Users/rgeta/Downloads/Group7_FinalProject-Shelyn/Group7_FinalProject-Shelyn/Pages/PaymentPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUGF5bWVudFBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-xki9jyfm85
+
+[C:/Users/rgeta/Downloads/Group7_FinalProject-Shelyn/Group7_FinalProject-Shelyn/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-5yr6veghvb
+
+[C:/Users/rgeta/Downloads/Group7_FinalProject-Shelyn/Group7_FinalProject-Shelyn/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-01giqx3ka5

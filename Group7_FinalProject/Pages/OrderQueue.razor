@@ -1,0 +1,120 @@
+﻿@page "/orderqueue"
+@using Group7_FinalProject.Data
+@using Microsoft.Data.SqlClient
+@inject NavigationManager navigationManager
+
+
+<h1>Order Queue</h1>
+
+<body>
+    <div class="order-queue">
+
+        <!-- Loop through orders in the order queue -->
+        @foreach (var order in orderQueue)
+        {
+            <!-- Display each order in a container -->
+            <div class="order-container @(IsOrderSelected(order) ? "selected-order" : "")" @onclick="() => SelectOrder(order)">
+                <div class="order-header">
+                    <span class="elapsed-time">@order.OrderDateTime</span>
+                    <span class="order-number">@order.OrderNum</span>
+                </div>
+                <ul class="order-items">
+
+                    <!-- Loop through food items retrieved by GetFoodsByOrderNum -->
+                    @foreach (var food in OrderManager.GetFoodsByOrderNum(order.OrderNum))
+                    {
+                        <li class="order-item">
+                            <div class="item-details">
+                                <div class="item-info">
+                                    <span class="item-name">@food.FoodName</span>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+    <div class="button-controls">
+        <button class="btn-bump-order" @onclick="() => BumpOrder(selectedOrder)">Bump Order</button>
+        <button class="btn-bump-all-orders" @onclick="BumpAllOrders">Bump All Orders</button>
+        @*  <button class="btn-recall-all">Recall All Orders</button>
+        <button class="btn-recall">Recall Order</button> *@
+    </div>
+</body>
+@code {
+    // Creating an instance of the OrderManager class
+    OrderManager om = new OrderManager();
+
+    // Creating an instance of the Order class
+    Order order = new Order();
+
+    // List to store orders
+    private List<Order> orderQueue = new List<Order>();
+
+    // Keeps track of the selected order
+    private Order selectedOrder;
+
+    // Runs when the component is initialized
+    protected override void OnInitialized()
+    {
+        // Retrieves distinct orders and assigns them to the orderQueue list
+        orderQueue = OrderManager.GetDistinctOrders();
+    }
+
+    // Method to remove and complete a specific order
+    private void BumpOrder(Order order)
+    {
+        if (selectedOrder != null && selectedOrder == order)
+        {
+            // Removes the selected order from the queue and marks it as completed in the database
+            orderQueue.Remove(order);
+            bool updateSuccess = OrderManager.UpdateOrderStatus(order.OrderNum, "Completed");
+
+            // Updates the orderQueue and resets the selected order
+            orderQueue = new List<Order>(orderQueue);
+            selectedOrder = null;
+        }
+        else
+        {
+            // Handles scenarios where no order is selected or a different order is being bumped
+        }
+    }
+
+    // Method to complete all orders in the queue
+    private void BumpAllOrders()
+    {
+        foreach (var order in orderQueue.ToList())
+        {
+            // Marks all orders in the queue as completed in the database
+            bool updateSuccess = OrderManager.UpdateOrderStatus(order.OrderNum, "Completed");
+        }
+
+        // Clears the order queue and resets the selected order
+        orderQueue.Clear();
+        selectedOrder = null;
+
+        // Triggers a UI update
+        StateHasChanged();
+    }
+
+    // Checks if an order is selected
+    private bool IsOrderSelected(Order order)
+    {
+        return selectedOrder != null && selectedOrder == order;
+    }
+
+    // Method to select or deselect an order
+    private void SelectOrder(Order order)
+    {
+        if (selectedOrder == order)
+        {
+            selectedOrder = null;
+        }
+        else
+        {
+            selectedOrder = order;
+        }
+    }
+}
+}

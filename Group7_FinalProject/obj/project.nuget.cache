@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "r1bzjH7vsRogs1rA/YO8ADuzqeYETz03u27c0jslruGDlA3ysEDkugIc6KmNEuM2CppuWDknSMuTrSQN5U8wUQ==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\rgeta\\Downloads\\Group7_FinalProject-Shelyn\\Group7_FinalProject-Shelyn\\Group7_FinalProject.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rgeta\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.31\\microsoft.windows.sdk.net.ref.10.0.19041.31.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1012",
+      "level": "Error",
+      "message": "Platform version is not present for one or more target frameworks, even though they have specified a platform: net6.0-ios, net6.0-maccatalyst"
+    }
+  ]
+}

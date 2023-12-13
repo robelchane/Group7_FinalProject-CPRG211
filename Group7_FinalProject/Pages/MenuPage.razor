@@ -1,0 +1,509 @@
+﻿@page "/MenuPage/{OrderNum:int}"
+@using Group7_FinalProject.Data
+@using Microsoft.Data.SqlClient
+@inject NavigationManager navigation;
+
+
+<h3>Menu Page</h3>
+
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-8">
+
+            <div class="labels">
+                <strong>Pizza</strong>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="food-square">
+                        @* <img src="url_to_your_second_image.jpg" alt="Food 2" class="img-fluid"> *@
+                        <p><strong>Donair Pizza with Chicken</strong></p>
+
+                        <div class="row" id="innerrow">
+                            <table class="table">
+                                <tr>
+                                    <td>Price: </td>
+                                    <td>$@priceList[0]</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-3">
+                                            <label for="formGroupExampleInput" class="form-label">Quantity:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" placeholder="1" @bind="@foodQty[0]">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <button class="btn btn-primary" @onclick="(() => addOrder(0))">Add</button>
+                        <button class="btn btn-primary" @onclick="(() => deleteOrder(0))">Delete</button>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="food-square">
+                        @* <img src="url_to_your_second_image.jpg" alt="Food 2" class="img-fluid"> *@
+                        <p><strong>Pepperoni Pizza</strong></p>
+
+                        <div class="row" id="innerrow">
+                            <table class="table">
+                                <tr>
+                                    <td>Price: </td>
+                                    <td>$@priceList[1]</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-3">
+                                            <label for="formGroupExampleInput" class="form-label">Quantity:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" placeholder="1" @bind="@foodQty[1]">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <button class="btn btn-primary" @onclick="(() => addOrder(1))">Add</button>
+                        <button class="btn btn-primary" @onclick="(() => deleteOrder(1))">Delete</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-6">
+                    <div class="food-square">
+                        @* <img src="url_to_your_second_image.jpg" alt="Food 2" class="img-fluid"> *@
+                        <p><strong>Vegetarian Pizza with Olives</strong></p>
+
+                        <div class="row" id="innerrow">
+
+                            <table class="table">
+                                <tr>
+                                    <td>Price: </td>
+                                    <td>$@priceList[2]</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-3">
+                                            <label for="formGroupExampleInput" class="form-label">Quantity:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" placeholder="1" @bind="@foodQty[2]">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <button class="btn btn-primary" @onclick="(() => addOrder(2))">Add</button>
+                        <button class="btn btn-primary" @onclick="(() => deleteOrder(2))">Delete</button>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="food-square">
+                        @* <img src="url_to_your_second_image.jpg" alt="Food 2" class="img-fluid"> *@
+                        <p><strong>Hawaiian Pizza</strong></p>
+
+
+                        <div class="row" id="innerrow">
+
+                            <table class="table">
+                                <tr>
+                                    <td>Price: </td>
+                                    <td>$@priceList[3]</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-3">
+                                            <label for="formGroupExampleInput" class="form-label">Quantity:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" placeholder="1" @bind="@foodQty[3]">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <button class="btn btn-primary" @onclick="(() => addOrder(3))">Add</button>
+                        <button class="btn btn-primary" @onclick="(() => deleteOrder(3))">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <div class="food-square">
+                        @* <img src="url_to_your_second_image.jpg" alt="Food 2" class="img-fluid"> *@
+                        <p><strong>Mediteranian Pizza with Spinach</strong></p>
+
+
+                        <div class="row" id="innerrow">
+
+                            <table class="table">
+                                <tr>
+                                    <td>Price: </td>
+                                    <td>$@priceList[4]</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-3">
+                                            <label for="formGroupExampleInput" class="form-label">Quantity:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" placeholder="1" @bind="@foodQty[4]">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <button class="btn btn-primary" @onclick="(() => addOrder(4))">Add</button>
+                        <button class="btn btn-primary" @onclick="(() => deleteOrder(4))">Delete</button>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="labels">
+                <strong>Beverages</strong>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-6">
+                    <div class="food-square">
+                        @* <img src="url_to_your_second_image.jpg" alt="Food 2" class="img-fluid"> *@
+                        <p><strong>Coke</strong></p>
+
+                        <div class="row" id="innerrow">
+                            <table class="table">
+                                <tr>
+                                    <td>Price: </td>
+                                    <td>$@priceList[5]</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-3">
+                                            <label for="formGroupExampleInput" class="form-label">Quantity:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" placeholder="1" @bind="@foodQty[5]">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <button class="btn btn-primary" @onclick="(() => addOrder(5))">Add</button>
+                        <button class="btn btn-primary" @onclick="(() => deleteOrder(5))">Delete</button>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="food-square">
+                        @* <img src="url_to_your_second_image.jpg" alt="Food 2" class="img-fluid"> *@
+                        <p><strong>Americano</strong></p>
+
+                        <div class="row" id="innerrow">
+                            <table class="table">
+                                <tr>
+                                    <td>Price: </td>
+                                    <td>$@priceList[6]</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-3">
+                                            <label for="formGroupExampleInput" class="form-label">Quantity:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" placeholder="1" @bind="@foodQty[6]">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <button class="btn btn-primary" @onclick="(() => addOrder(6))">Add</button>
+                        <button class="btn btn-primary" @onclick="(() => deleteOrder(6))">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <div class="food-square">
+                        @* <img src="url_to_your_second_image.jpg" alt="Food 2" class="img-fluid"> *@
+                        <p><strong>Earl Grey</strong></p>
+
+                        <div class="row" id="innerrow">
+                            <table class="table">
+                                <tr>
+                                    <td>Price: </td>
+                                    <td>$@priceList[7]</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-3">
+                                            <label for="formGroupExampleInput" class="form-label">Quantity:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" placeholder="1" @bind="@foodQty[7]">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <button class="btn btn-primary" @onclick="(() => addOrder(7))">Add</button>
+                        <button class="btn btn-primary" @onclick="(() => deleteOrder(7))">Delete</button>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="food-square">
+                        @* <img src="url_to_your_second_image.jpg" alt="Food 2" class="img-fluid"> *@
+                        <p><strong>Pineapple</strong></p>
+
+                        <div class="row" id="innerrow">
+                            <table class="table">
+                                <tr>
+                                    <td>Price: </td>
+                                    <td>$@priceList[8]</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="col-3">
+                                            <label for="formGroupExampleInput" class="form-label">Quantity:</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="col-4">
+                                            <input type="text" class="form-control" placeholder="1" @bind="@foodQty[8]">
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <button class="btn btn-primary" @onclick="(() => addOrder(8))">Add</button>
+                        <button class="btn btn-primary" @onclick="(() => deleteOrder(8))">Delete</button>
+                    </div>
+                </div>
+                <br />
+            </div>
+
+
+        </div>
+        <div class="col-4">
+
+            <!-- Display order summary on the right -->
+
+            <div class="labels">
+                <strong>Summary</strong>
+            </div>
+            <div class="orderscol">
+
+                <p>Total Price: $@totalPrice</p>
+                <button class="btn btn-primary mt-1" @onclick="checkOut">Checkout</button>
+
+                <table class="table">
+                    <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Unit Price</th>
+                        <th> Price</th>
+                    </tr>
+                    @foreach (var food in orderList1)
+                    {
+                        int unitprice = @food.TotalPrice / food.Quantity;
+                        <tr>
+                            <td>@food.OrderFoodNum</td>
+                            <td>@food.Quantity</td>
+                            <td>@unitprice</td>
+                            <td>@food.TotalPrice</td>
+                        </tr>
+                    }
+                </table>
+                @* Method so that the alert box only shows when an error occurs *@
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" @onclick="clearErrorMessage"></button>
+                        @errorMessage
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@code {
+    //Variable definitions
+    public static Order ord = new Order();
+    public static List<Order> orderList1 = new List<Order>();
+    Order newOrder;
+
+    MenuManager menumanager = new MenuManager();
+    List<Food> menu = MenuManager.GetMenu();
+    List<Food> menu1 = new List<Food>();
+    int[] priceList = new int[90];
+    int[] foodNo = new int[90];
+    int[] foodQty = new int[90];
+    string[] foodName = new string[90];
+
+
+    DateTime currentDateTime = DateTime.Now;
+    private double totalPrice = 0;
+    string errorMessage;
+
+    [Parameter]
+    public int OrderNum { get; set; }
+    protected override void OnParametersSet()
+    {
+        var num = OrderNum;
+    }
+
+    //Initialization
+    protected override void OnInitialized()
+    {
+        populateMenu();
+    }
+    //Navigation to Payment page
+    private void checkOut()
+    {
+        navigation.NavigateTo($"payment/{OrderNum}");
+    }
+    //Method to populate arrays from DB data(menu list)
+    private void populateMenu()
+    {
+        int ctr = 0;
+        foreach (var item in menu)
+        {
+            string line = item.ToString();
+            string[] x = line.Split(",");
+
+            foodNo[ctr] = int.Parse(x[0]);
+            foodName[ctr] = x[1];
+            priceList[ctr] = int.Parse(x[2]);
+            foodQty[ctr] = 1;
+            ctr = ctr + 1;
+        }
+    }
+    //Add orders to order list
+    private void addOrder(int no)
+    {
+        int isNew = 1;
+        try
+        {
+            quantityValidation(foodQty[no]);
+            clearErrorMessage();
+            foreach (var x in orderList1)
+            {
+                if (x.OrderFoodNum == foodNo[no])
+                {
+                    x.Quantity = foodQty[no];
+                    totalPrice = totalPrice - x.TotalPrice;
+                    x.TotalPrice = priceList[no] * foodQty[no];
+                    isNew = 0;
+                    break;
+                }
+            }
+            if (isNew == 1)
+            {
+                newOrder = new Order(OrderNum, foodNo[no], foodQty[no], currentDateTime, "Pending", priceList[no] * foodQty[no]);
+                orderList1.Add(newOrder);
+            }
+
+            totalPrice += computeTotal(foodQty[no], priceList[no]);
+        }
+        catch (InvalidQtyException e)
+        {
+            errorMessage = e.Message;
+        }
+
+    }
+    //Delete orders from order list
+    private void deleteOrder(int no)
+    {
+        try
+        {
+            deleteValidation(no);
+            clearErrorMessage();
+            foreach (var x in orderList1)
+            {
+                if (x.OrderFoodNum == foodNo[no])
+                {
+                    orderList1.Remove(x);
+                    totalPrice -= computeTotal(foodQty[no], priceList[no]);
+                    break;
+                }
+            }
+        }
+        catch (InvalidDeleteException e)
+        {
+            errorMessage = e.Message;
+        }
+
+    }
+    //Computes total per item
+    private double computeTotal(int qty, double price)
+    {
+        return qty * price;
+    }
+    //Check if entered quantity is <=0 when adding items
+    private void quantityValidation(int qty)
+    {
+        if (qty <= 0)
+        {
+            throw new InvalidQtyException();
+        }
+    }
+    //Check if item being deleted exist in order
+    private void deleteValidation(int no)
+    {
+        int status = 0;
+        foreach (var x in orderList1)
+        {
+            if (x.OrderFoodNum == foodNo[no])
+            {
+                status = 1;
+                break;
+            }
+        }
+        if (status == 0)
+        {
+            throw new InvalidDeleteException();
+        }
+    }
+    //Clears error message
+    private void clearErrorMessage()
+    {
+        errorMessage = "";
+    }
+}

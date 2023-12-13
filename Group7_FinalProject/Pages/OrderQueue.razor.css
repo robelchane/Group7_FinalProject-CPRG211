@@ -1,0 +1,87 @@
+﻿﻿.order-queue {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 15px;
+    height: 80vh;
+    border: 1px solid black;
+    background-color: grey;
+}
+
+.order-container {
+    flex: 0 0 calc(20% - 10px);
+    max-width: calc(20% - 10px);
+    height: calc(40vh - 20px);
+    border: 1px solid black;
+    background-color: white;
+    overflow-y: auto;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ccc;
+}
+
+.order-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.order-item {
+    margin-bottom: 10px;
+}
+
+.item-details {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-bottom: 1px dashed grey;
+}
+
+.item-info {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.quantity {
+    margin-right: 8px;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.order-note {
+    color: grey;
+    margin-left: 30px;
+}
+
+.button-controls {
+    display: flex;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 1px 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+    .button-controls button {
+        flex: 1;
+        margin: 0 1px;
+        padding: 12px 0;
+        font-size: 20px;
+        width: 100%;
+    }
+
+.selected-order {
+    border: 2px solid #ffcc00; /* Example: Yellow border */
+    /* Add any other styles to enhance visibility */
+}
